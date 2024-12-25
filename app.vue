@@ -23,7 +23,7 @@ useHead({
 
 
   titleTemplate:(titleChunk)=>{
-return titleChunk ? `${titleChunk}- Shopping site`: "'Shopping site'"
+return titleChunk ? `${titleChunk}- Shopping site`: "Shopping site"
   }
 })
 </script>
