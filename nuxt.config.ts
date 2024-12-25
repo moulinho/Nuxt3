@@ -1,10 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   css: [
-    "~/assets/dist/css/tabler.min.css",
-    "~/assets/dist/css/tabler-vendors.min.css",
+    "~/assets/dist/tabler.min.css",
+    "~/assets/dist/tabler-vendors.min.css",
   ],
   modules: [
+     'usebootstrap',
     [
       "@pinia/nuxt",
       {

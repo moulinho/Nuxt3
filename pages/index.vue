@@ -6,9 +6,9 @@
             <div class="page-body">
                 <div class="container-xl">
 
-                    <div class="">
+                    <div class="mb-3 w-25">
                         <form @submit.prevent="tilteProduct">
-                            <input type="text" placeholder="Search" v-model="searchTitle" class="form-control">
+                            <input type="text" placeholder="Search" v-model="searchTitle" class="form-control my-3">
                             <button type="submit" class="btn btn-primary">Search</button>
                         </form>
                     </div>

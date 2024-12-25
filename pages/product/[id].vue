@@ -84,6 +84,9 @@ async function addToCart(prod) {
   })
 }
 
+console.log('productStore',productStore);
+
+
 // definePageMeta({
 //   middleware:'check-auth'
 // })
