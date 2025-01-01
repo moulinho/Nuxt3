@@ -22,7 +22,9 @@ export const useProduct = defineStore("product", {
       const { data: products } = useFetch(this.baseUrl, {
         key: `products`,
       });
+      
       this.products = products;
+      return this.products;
     },
 
     /**
@@ -37,6 +39,7 @@ export const useProduct = defineStore("product", {
       });
 
       this.products = products;
+      return this.products
     },
 
     /**
@@ -49,6 +52,7 @@ export const useProduct = defineStore("product", {
         key: `product/${id}`,
       });
       this.product = product;
+    
     },
 
     /**
@@ -66,7 +70,7 @@ export const useProduct = defineStore("product", {
           }
         );
         this.categories = categories;
-        console.log("categories1", this.categories);
+        // console.log("categories1", this.categories);
       } else {
         const { data: categories } = useFetch(
           "https://api.escuelajs.co/api/v1/categories",
@@ -77,7 +81,7 @@ export const useProduct = defineStore("product", {
         this.categories = categories;
       }
 
-      console.log("categories2", this.categories);
+      // console.log("categories2", this.categories);
     },
   },
 });
