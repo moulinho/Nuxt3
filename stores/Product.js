@@ -11,7 +11,7 @@ export const useProduct = defineStore("product", {
     getProducts: (state) => state.products,
     getProduct: (state) => {
       state.product;
-    },
+    },   
   },
   actions: {
     /**
@@ -26,7 +26,7 @@ export const useProduct = defineStore("product", {
       this.products = products;
       return this.products;
     },
-
+    
     /**
      * Fetch products from the API
      *
