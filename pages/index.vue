@@ -27,8 +27,6 @@
 
 const productStore = useProduct()
 
-
-
 const route = useRoute();
 
 const searchTitle = ref()
