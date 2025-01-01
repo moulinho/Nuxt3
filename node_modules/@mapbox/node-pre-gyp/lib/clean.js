@@ -4,8 +4,8 @@ module.exports = exports = clean;
 
 exports.usage = 'Removes the entire folder containing the compiled .node module';
 
-const rm = require('rimraf');
-const exists = require('fs').exists || require('path').exists;
+const fs = require('fs');
+const exists = fs.exists || require('path').exists;
 const versioning = require('./util/versioning.js');
 const napi = require('./util/napi.js');
 const path = require('path');
@@ -23,7 +23,7 @@ function clean(gyp, argv, callback) {
     exists(to_delete, (found) => {
       if (found) {
         if (!gyp.opts.silent_clean) console.log('[' + package_json.name + '] Removing "%s"', to_delete);
-        return rm(to_delete, callback);
+        return fs.rm(to_delete, { recursive: true, force: true }, callback);
       }
       return callback();
     });

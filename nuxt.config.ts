@@ -5,13 +5,11 @@ export default defineNuxtConfig({
     "~/assets/dist/tabler-vendors.min.css",
   ],
   modules: [
-     'usebootstrap',
     [
       "@pinia/nuxt",
       {
         autoImports: [
-          // automatically imports `defineStore`
-          "defineStore", // import { defineStore } from 'pinia'
+          "defineStore",
           "acceptHMRUpdate",
           "storeToRefs",
         ],
@@ -23,31 +21,18 @@ export default defineNuxtConfig({
   ],
   i18n: {
     /* module options */
-    locales: ["en","fr"],
-    defaultLocale:'en',
-    customRoutes:'config',
-    pages:{
-      login:{
-        en:'/login',
-        fr:'/connexion'
-      }
-    },
-    vueI18n: {
-      legacy: false,
-      locale: "fr",
-      messages: {
-        fr: {
-          clearBasket: "vider le panier",
-          login: "Se connecter",
-        },
-        en: {
-          clearBasket: "Clear",
-          login: "Login",
-        },
+    locales: ["en", "fr"],
+    defaultLocale: "fr",
+    customRoutes: "config",
+    pages: {
+      login: {
+        en: "/login",
+        fr: "/connexion",
       },
     },
+    vueI18n: "./nuxt-i18n.js", // Reference the file directly
   },
-  imports: { dirs: ["stores"] }, //importation des contenu du dossier stores
+  imports: { dirs: ["stores"] }, // Importation of content from the stores directory
   image: {
     domains: ["https://api.escuelajs.co"],
   },
@@ -56,9 +41,4 @@ export default defineNuxtConfig({
       apiBase: "https://api.escuelajs.co/api/v1/products/",
     },
   },
-  // ssr:false
-  // routeRules:{
-  //   '/product/**':{ static:true },
-  //   // '/cart/**':{ssr:false}
-  // }
 });

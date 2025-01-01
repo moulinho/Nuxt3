@@ -2,7 +2,6 @@
 
 #### @mapbox/node-pre-gyp makes it easy to publish and install Node.js C++ addons from binaries
 
-[![Build Status](https://travis-ci.com/mapbox/node-pre-gyp.svg?branch=master)](https://travis-ci.com/mapbox/node-pre-gyp)
 [![Build status](https://ci.appveyor.com/api/projects/status/3nxewb425y83c0gv)](https://ci.appveyor.com/project/Mapbox/node-pre-gyp)
 
 `@mapbox/node-pre-gyp` stands between [npm](https://github.com/npm/npm) and [node-gyp](https://github.com/Tootallnate/node-gyp) and offers a cross-platform method of binary deployment.
@@ -36,7 +35,10 @@ See the [Frequently Ask Questions](https://github.com/mapbox/node-pre-gyp/wiki/F
 
 ## Depends
 
- - Node.js >= node v8.x
+We will attempt to track the [Node.js release schedule](https://github.com/nodejs/release#release-schedule) and will regularly retire support for versions that have reached EOL.
+
+ - v2: Node.js >= 18.x (unreleased)
+ - v1: Node.js >= 8.x
 
 ## Install
 
@@ -441,7 +443,7 @@ The following two configuration values, which were implemented in previous versi
 
 2. `node_abi_napi` If the value returned for `napi_version` is non empty, this value is `'napi'`. If the value returned for `napi_version` is empty, this value is the value returned for `node_abi`.
 
-These values are present for use in the `binding.gyp` file and may be used as `{napi_version}` and `{node_abi_napi}` for text substituion in the `binary` properties of the `package.json` file.
+These values are present for use in the `binding.gyp` file and may be used as `{napi_version}` and `{node_abi_napi}` for text substitution in the `binary` properties of the `package.json` file.
 
 ## S3 Hosting
 

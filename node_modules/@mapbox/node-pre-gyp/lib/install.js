@@ -6,11 +6,10 @@ exports.usage = 'Attempts to install pre-built binary for module';
 
 const fs = require('fs');
 const path = require('path');
-const log = require('npmlog');
+const log = require('./util/log.js');
 const existsAsync = fs.exists || path.exists;
 const versioning = require('./util/versioning.js');
 const napi = require('./util/napi.js');
-const makeDir = require('make-dir');
 // for fetching binaries
 const fetch = require('node-fetch');
 const tar = require('tar');
@@ -25,7 +24,7 @@ try {
 }
 
 function place_binary(uri, targetDir, opts, callback) {
-  log.http('GET', uri);
+  log.log('GET', uri);
 
   // Try getting version info from the currently running npm.
   const envVersionInfo = process.env.npm_config_user_agent ||
@@ -56,9 +55,9 @@ function place_binary(uri, targetDir, opts, callback) {
                     process.env.npm_config_proxy;
   let agent;
   if (proxyUrl) {
-    const ProxyAgent = require('https-proxy-agent');
-    agent = new ProxyAgent(proxyUrl);
-    log.http('download', 'proxy agent configured using: "%s"', proxyUrl);
+    const { HttpsProxyAgent } = require('https-proxy-agent');
+    agent = new HttpsProxyAgent(proxyUrl);
+    log.log('download', `proxy agent configured using: "${proxyUrl}"`);
   }
 
   fetch(sanitized, { agent })
@@ -72,7 +71,7 @@ function place_binary(uri, targetDir, opts, callback) {
         let extractions = 0;
         const countExtractions = (entry) => {
           extractions += 1;
-          log.info('install', 'unpacking %s', entry.path);
+          log.info('install', `unpacking ${entry.path}`);
         };
 
         dataStream.pipe(extract(targetDir, countExtractions))
@@ -149,7 +148,7 @@ function print_fallback_error(err, opts, package_json) {
     full_message += fallback_message;
     log.warn('Tried to download(' + err.statusCode + '): ' + opts.hosted_tarball);
     log.warn(full_message);
-    log.http(err.message);
+    log.error(err.message);
   } else {
     // If we do not have a statusCode that means an unexpected error
     // happened and prevented an http response, so we output the exact error
@@ -208,7 +207,7 @@ function install(gyp, argv, callback) {
         log.info('check', 'checked for "' + binary_module + '" (not found)');
       }
 
-      makeDir(to).then(() => {
+      fs.promises.mkdir(to, { recursive: true }).then(() => {
         const fileName = from.startsWith('file://') && from.slice('file://'.length);
         if (fileName) {
           extract_from_local(fileName, to, after_place);

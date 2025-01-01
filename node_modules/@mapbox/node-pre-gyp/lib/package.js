@@ -6,11 +6,10 @@ exports.usage = 'Packs binary (and enclosing directory) into locally staged tarb
 
 const fs = require('fs');
 const path = require('path');
-const log = require('npmlog');
+const log = require('./util/log.js');
 const versioning = require('./util/versioning.js');
 const napi = require('./util/napi.js');
 const existsAsync = fs.exists || path.exists;
-const makeDir = require('make-dir');
 const tar = require('tar');
 
 function readdirSync(dir) {
@@ -49,7 +48,7 @@ function _package(gyp, argv, callback) {
       }
       return false;
     };
-    makeDir(path.dirname(tarball)).then(() => {
+    fs.promises.mkdir(path.dirname(tarball), { recursive: true }).then(() => {
       let files = readdirSync(from);
       const base = path.basename(from);
       files = files.map((file) => {

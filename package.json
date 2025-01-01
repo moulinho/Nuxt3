@@ -9,12 +9,11 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.6.4",
-    "@nuxt/image-edge": "^1.0.0-27919678.2f5b64b",
+    "@nuxt/image-edge": "^1.3.0-28493895.369b747",
     "@nuxtjs/i18n": "^8.0.0-beta.9",
     "@vueuse/core": "^9.13.0",
     "@vueuse/nuxt": "^9.13.0",
-    "nuxt": "^3.1.2",
-    "usebootstrap": "3.5.100"
+    "nuxt": "^3.1.2"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.6",

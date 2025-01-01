@@ -6,13 +6,12 @@ exports.usage = 'Tests that the staged package is valid';
 
 const fs = require('fs');
 const path = require('path');
-const log = require('npmlog');
+const log = require('./util/log.js');
 const existsAsync = fs.exists || path.exists;
 const versioning = require('./util/versioning.js');
 const napi = require('./util/napi.js');
 const testbinary = require('./testbinary.js');
 const tar = require('tar');
-const makeDir = require('make-dir');
 
 function testpackage(gyp, argv, callback) {
   const package_json = gyp.package_json;
@@ -28,7 +27,7 @@ function testpackage(gyp, argv, callback) {
       log.info('install', 'unpacking [' + entry.path + ']');
     }
 
-    makeDir(to).then(() => {
+    fs.promises.mkdir(to, { recursive: true }).then(() => {
       tar.extract({
         file: tarball,
         cwd: to,
